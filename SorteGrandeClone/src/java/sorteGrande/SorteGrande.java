@@ -4,16 +4,8 @@
  */
 package sorteGrande;
 
-import conexao.Conexao;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javax.jws.WebService;
 import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +15,6 @@ import java.util.logging.Logger;
 public class SorteGrande {
 
     
-
     /**
      * This is a sample web service operation
      */
