@@ -19,8 +19,6 @@
         <%            
             List<Resultado> listaMegaSena = new Resultado().getListaResultado("MEGA_SENA");
             List<Resultado> listaQuina = new Resultado().getListaResultado("QUINA");
-            
-            for (Resultado resultado : listaMegaSena)    ;
         %>
 
         <table border="1">
