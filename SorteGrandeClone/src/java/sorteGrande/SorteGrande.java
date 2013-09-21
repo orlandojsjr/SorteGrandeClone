@@ -4,10 +4,16 @@
  */
 package sorteGrande;
 
+import conexao.Conexao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.jws.WebService;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +21,8 @@ import java.util.Arrays;
  */
 @WebService(serviceName = "SorteGrande")
 public class SorteGrande {
+
+    private Conexao con;
 
     /**
      * This is a sample web service operation
@@ -48,6 +56,7 @@ public class SorteGrande {
         for (i = 0; i < qtNumeros; i++) {
             resp += v[i] + " ";
         }
+
         return "Os numeros da sorte sao: " + resp;
     }
 
@@ -74,5 +83,31 @@ public class SorteGrande {
             resp += v[i] + " ";
         }
         return "Os numeros da sorte sao: " + resp;
+    }
+
+    private void salvarResultado(String resultado, String tipo) {
+        try {
+            con.iniciarConexao();
+            Statement stm = con.getConnection().createStatement();
+            stm.execute("INSERT INTO resultado (RESULTADO, TIPO) values (" + resultado + ", " + tipo + ")");
+            con.fecharConexao();
+        } catch (SQLException ex) {
+            Logger.getLogger(SorteGrande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getListaResultado(String tipo) {
+        try {
+            con.iniciarConexao();
+            Statement stm = con.getConnection().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM resultado WHERE TIPO = " + tipo + "");
+            List<Resultado> retorno = new ArrayList<Resultado>();
+            while(rs.next()){
+                //retorno.add(new Resultado(rs.getInt("ID"),, tipo));
+            }
+            con.fecharConexao();
+        } catch (SQLException ex) {
+            Logger.getLogger(SorteGrande.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
