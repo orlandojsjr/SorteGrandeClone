@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @WebService(serviceName = "SorteGrande")
 public class SorteGrande {
 
-    private Conexao con;
+    
 
     /**
      * This is a sample web service operation
@@ -83,31 +83,5 @@ public class SorteGrande {
             resp += v[i] + " ";
         }
         return "Os numeros da sorte sao: " + resp;
-    }
-
-    private void salvarResultado(String resultado, String tipo) {
-        try {
-            con.iniciarConexao();
-            Statement stm = con.getConnection().createStatement();
-            stm.execute("INSERT INTO resultado (RESULTADO, TIPO) values (" + resultado + ", " + tipo + ")");
-            con.fecharConexao();
-        } catch (SQLException ex) {
-            Logger.getLogger(SorteGrande.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void getListaResultado(String tipo) {
-        try {
-            con.iniciarConexao();
-            Statement stm = con.getConnection().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM resultado WHERE TIPO = " + tipo + "");
-            List<Resultado> retorno = new ArrayList<Resultado>();
-            while(rs.next()){
-                //retorno.add(new Resultado(rs.getInt("ID"),, tipo));
-            }
-            con.fecharConexao();
-        } catch (SQLException ex) {
-            Logger.getLogger(SorteGrande.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
